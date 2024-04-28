@@ -32,3 +32,4 @@
 *.app
 .history/
 .cache/
+.vscode/
