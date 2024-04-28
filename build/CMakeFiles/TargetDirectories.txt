@@ -1,0 +1,5 @@
+/home/lap/app/EffictiveModernCPP/build/CMakeFiles/edit_cache.dir
+/home/lap/app/EffictiveModernCPP/build/CMakeFiles/rebuild_cache.dir
+/home/lap/app/EffictiveModernCPP/build/item19/CMakeFiles/item19.dir
+/home/lap/app/EffictiveModernCPP/build/item19/CMakeFiles/edit_cache.dir
+/home/lap/app/EffictiveModernCPP/build/item19/CMakeFiles/rebuild_cache.dir

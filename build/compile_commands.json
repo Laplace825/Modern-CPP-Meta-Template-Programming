@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/lap/app/EffictiveModernCPP/build/item19",
+  "command": "/usr/bin/g++   -g -std=gnu++23 -o CMakeFiles/item19.dir/enable_if.cpp.o -c /home/lap/app/EffictiveModernCPP/item19/enable_if.cpp",
+  "file": "/home/lap/app/EffictiveModernCPP/item19/enable_if.cpp",
+  "output": "item19/CMakeFiles/item19.dir/enable_if.cpp.o"
+}
+]
