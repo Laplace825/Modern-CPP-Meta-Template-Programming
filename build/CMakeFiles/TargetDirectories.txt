@@ -1,5 +1,12 @@
 /home/lap/app/EffictiveModernCPP/build/CMakeFiles/edit_cache.dir
 /home/lap/app/EffictiveModernCPP/build/CMakeFiles/rebuild_cache.dir
-/home/lap/app/EffictiveModernCPP/build/item19/CMakeFiles/item19.dir
-/home/lap/app/EffictiveModernCPP/build/item19/CMakeFiles/edit_cache.dir
-/home/lap/app/EffictiveModernCPP/build/item19/CMakeFiles/rebuild_cache.dir
+/home/lap/app/EffictiveModernCPP/build/MCPP/CMakeFiles/edit_cache.dir
+/home/lap/app/EffictiveModernCPP/build/MCPP/CMakeFiles/rebuild_cache.dir
+/home/lap/app/EffictiveModernCPP/build/MCPP/item19/CMakeFiles/item19.dir
+/home/lap/app/EffictiveModernCPP/build/MCPP/item19/CMakeFiles/edit_cache.dir
+/home/lap/app/EffictiveModernCPP/build/MCPP/item19/CMakeFiles/rebuild_cache.dir
+/home/lap/app/EffictiveModernCPP/build/GMP/CMakeFiles/edit_cache.dir
+/home/lap/app/EffictiveModernCPP/build/GMP/CMakeFiles/rebuild_cache.dir
+/home/lap/app/EffictiveModernCPP/build/GMP/Definition/CMakeFiles/Definition.dir
+/home/lap/app/EffictiveModernCPP/build/GMP/Definition/CMakeFiles/edit_cache.dir
+/home/lap/app/EffictiveModernCPP/build/GMP/Definition/CMakeFiles/rebuild_cache.dir

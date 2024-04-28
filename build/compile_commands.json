@@ -1,8 +1,14 @@
 [
 {
-  "directory": "/home/lap/app/EffictiveModernCPP/build/item19",
-  "command": "/usr/bin/g++   -g -std=gnu++23 -o CMakeFiles/item19.dir/enable_if.cpp.o -c /home/lap/app/EffictiveModernCPP/item19/enable_if.cpp",
-  "file": "/home/lap/app/EffictiveModernCPP/item19/enable_if.cpp",
-  "output": "item19/CMakeFiles/item19.dir/enable_if.cpp.o"
+  "directory": "/home/lap/app/EffictiveModernCPP/build/MCPP/item19",
+  "command": "/usr/bin/g++   -g -std=gnu++23 -o CMakeFiles/item19.dir/enable_if.cpp.o -c /home/lap/app/EffictiveModernCPP/MCPP/item19/enable_if.cpp",
+  "file": "/home/lap/app/EffictiveModernCPP/MCPP/item19/enable_if.cpp",
+  "output": "MCPP/item19/CMakeFiles/item19.dir/enable_if.cpp.o"
+},
+{
+  "directory": "/home/lap/app/EffictiveModernCPP/build/GMP/Definition",
+  "command": "/usr/bin/g++   -g -std=gnu++23 -o CMakeFiles/Definition.dir/main.cpp.o -c /home/lap/app/EffictiveModernCPP/GMP/Definition/main.cpp",
+  "file": "/home/lap/app/EffictiveModernCPP/GMP/Definition/main.cpp",
+  "output": "GMP/Definition/CMakeFiles/Definition.dir/main.cpp.o"
 }
 ]

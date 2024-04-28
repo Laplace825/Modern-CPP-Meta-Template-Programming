@@ -127,7 +127,16 @@
 			"path" : "/usr/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake"
 		},
 		{
-			"path" : "item19/CMakeLists.txt"
+			"path" : "MCPP/CMakeLists.txt"
+		},
+		{
+			"path" : "MCPP/item19/CMakeLists.txt"
+		},
+		{
+			"path" : "GMP/CMakeLists.txt"
+		},
+		{
+			"path" : "GMP/Definition/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles /home/lap/app/EffictiveModernCPP/build//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/lap/app/EffictiveModernCPP/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles /home/lap/app/EffictiveModernCPP/build/MCPP/item19//CMakeFiles/progress.marks
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCPP/item19/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCPP/item19/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,44 +103,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCPP/item19/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCPP/item19/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lap/app/EffictiveModernCPP/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named item19
+# Convenience name for target.
+MCPP/item19/CMakeFiles/item19.dir/rule:
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCPP/item19/CMakeFiles/item19.dir/rule
+.PHONY : MCPP/item19/CMakeFiles/item19.dir/rule
 
-# Build rule for target.
-item19: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 item19
+# Convenience name for target.
+item19: MCPP/item19/CMakeFiles/item19.dir/rule
 .PHONY : item19
 
 # fast build rule for target.
 item19/fast:
-	$(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/build
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/build
 .PHONY : item19/fast
 
-#=============================================================================
-# Target rules for targets named Definition
+enable_if.o: enable_if.cpp.o
+.PHONY : enable_if.o
 
-# Build rule for target.
-Definition: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Definition
-.PHONY : Definition
+# target to build an object file
+enable_if.cpp.o:
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/enable_if.cpp.o
+.PHONY : enable_if.cpp.o
 
-# fast build rule for target.
-Definition/fast:
-	$(MAKE) $(MAKESILENT) -f GMP/Definition/CMakeFiles/Definition.dir/build.make GMP/Definition/CMakeFiles/Definition.dir/build
-.PHONY : Definition/fast
+enable_if.i: enable_if.cpp.i
+.PHONY : enable_if.i
+
+# target to preprocess a source file
+enable_if.cpp.i:
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/enable_if.cpp.i
+.PHONY : enable_if.cpp.i
+
+enable_if.s: enable_if.cpp.s
+.PHONY : enable_if.s
+
+# target to generate assembly for a file
+enable_if.cpp.s:
+	cd /home/lap/app/EffictiveModernCPP/build && $(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/enable_if.cpp.s
+.PHONY : enable_if.cpp.s
 
 # Help Target
 help:
@@ -150,8 +162,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Definition"
 	@echo "... item19"
+	@echo "... enable_if.o"
+	@echo "... enable_if.i"
+	@echo "... enable_if.s"
 .PHONY : help
 
 
@@ -163,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lap/app/EffictiveModernCPP/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

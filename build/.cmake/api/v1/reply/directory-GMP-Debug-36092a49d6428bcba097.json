@@ -8,7 +8,7 @@
 	"installers" : [],
 	"paths" : 
 	{
-		"build" : "item19",
-		"source" : "item19"
+		"build" : "GMP",
+		"source" : "GMP"
 	}
 }

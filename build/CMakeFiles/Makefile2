@@ -63,57 +63,131 @@ CMAKE_BINARY_DIR = /home/lap/app/EffictiveModernCPP/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: item19/all
+all: MCPP/all
+all: GMP/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: item19/preinstall
+preinstall: MCPP/preinstall
+preinstall: GMP/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: item19/clean
+clean: MCPP/clean
+clean: GMP/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory item19
+# Directory level rules for directory GMP
 
 # Recursive "all" directory target.
-item19/all: item19/CMakeFiles/item19.dir/all
-.PHONY : item19/all
+GMP/all: GMP/Definition/all
+.PHONY : GMP/all
 
 # Recursive "preinstall" directory target.
-item19/preinstall:
-.PHONY : item19/preinstall
+GMP/preinstall: GMP/Definition/preinstall
+.PHONY : GMP/preinstall
 
 # Recursive "clean" directory target.
-item19/clean: item19/CMakeFiles/item19.dir/clean
-.PHONY : item19/clean
+GMP/clean: GMP/Definition/clean
+.PHONY : GMP/clean
 
 #=============================================================================
-# Target rules for target item19/CMakeFiles/item19.dir
+# Directory level rules for directory GMP/Definition
+
+# Recursive "all" directory target.
+GMP/Definition/all: GMP/Definition/CMakeFiles/Definition.dir/all
+.PHONY : GMP/Definition/all
+
+# Recursive "preinstall" directory target.
+GMP/Definition/preinstall:
+.PHONY : GMP/Definition/preinstall
+
+# Recursive "clean" directory target.
+GMP/Definition/clean: GMP/Definition/CMakeFiles/Definition.dir/clean
+.PHONY : GMP/Definition/clean
+
+#=============================================================================
+# Directory level rules for directory MCPP
+
+# Recursive "all" directory target.
+MCPP/all: MCPP/item19/all
+.PHONY : MCPP/all
+
+# Recursive "preinstall" directory target.
+MCPP/preinstall: MCPP/item19/preinstall
+.PHONY : MCPP/preinstall
+
+# Recursive "clean" directory target.
+MCPP/clean: MCPP/item19/clean
+.PHONY : MCPP/clean
+
+#=============================================================================
+# Directory level rules for directory MCPP/item19
+
+# Recursive "all" directory target.
+MCPP/item19/all: MCPP/item19/CMakeFiles/item19.dir/all
+.PHONY : MCPP/item19/all
+
+# Recursive "preinstall" directory target.
+MCPP/item19/preinstall:
+.PHONY : MCPP/item19/preinstall
+
+# Recursive "clean" directory target.
+MCPP/item19/clean: MCPP/item19/CMakeFiles/item19.dir/clean
+.PHONY : MCPP/item19/clean
+
+#=============================================================================
+# Target rules for target MCPP/item19/CMakeFiles/item19.dir
 
 # All Build rule for target.
-item19/CMakeFiles/item19.dir/all:
-	$(MAKE) $(MAKESILENT) -f item19/CMakeFiles/item19.dir/build.make item19/CMakeFiles/item19.dir/depend
-	$(MAKE) $(MAKESILENT) -f item19/CMakeFiles/item19.dir/build.make item19/CMakeFiles/item19.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lap/app/EffictiveModernCPP/build/CMakeFiles --progress-num=1,2 "Built target item19"
-.PHONY : item19/CMakeFiles/item19.dir/all
+MCPP/item19/CMakeFiles/item19.dir/all:
+	$(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/depend
+	$(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lap/app/EffictiveModernCPP/build/CMakeFiles --progress-num=3,4 "Built target item19"
+.PHONY : MCPP/item19/CMakeFiles/item19.dir/all
 
 # Build rule for subdir invocation for target.
-item19/CMakeFiles/item19.dir/rule: cmake_check_build_system
+MCPP/item19/CMakeFiles/item19.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 item19/CMakeFiles/item19.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MCPP/item19/CMakeFiles/item19.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles 0
-.PHONY : item19/CMakeFiles/item19.dir/rule
+.PHONY : MCPP/item19/CMakeFiles/item19.dir/rule
 
 # Convenience name for target.
-item19: item19/CMakeFiles/item19.dir/rule
+item19: MCPP/item19/CMakeFiles/item19.dir/rule
 .PHONY : item19
 
 # clean rule for target.
-item19/CMakeFiles/item19.dir/clean:
-	$(MAKE) $(MAKESILENT) -f item19/CMakeFiles/item19.dir/build.make item19/CMakeFiles/item19.dir/clean
-.PHONY : item19/CMakeFiles/item19.dir/clean
+MCPP/item19/CMakeFiles/item19.dir/clean:
+	$(MAKE) $(MAKESILENT) -f MCPP/item19/CMakeFiles/item19.dir/build.make MCPP/item19/CMakeFiles/item19.dir/clean
+.PHONY : MCPP/item19/CMakeFiles/item19.dir/clean
+
+#=============================================================================
+# Target rules for target GMP/Definition/CMakeFiles/Definition.dir
+
+# All Build rule for target.
+GMP/Definition/CMakeFiles/Definition.dir/all:
+	$(MAKE) $(MAKESILENT) -f GMP/Definition/CMakeFiles/Definition.dir/build.make GMP/Definition/CMakeFiles/Definition.dir/depend
+	$(MAKE) $(MAKESILENT) -f GMP/Definition/CMakeFiles/Definition.dir/build.make GMP/Definition/CMakeFiles/Definition.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lap/app/EffictiveModernCPP/build/CMakeFiles --progress-num=1,2 "Built target Definition"
+.PHONY : GMP/Definition/CMakeFiles/Definition.dir/all
+
+# Build rule for subdir invocation for target.
+GMP/Definition/CMakeFiles/Definition.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 GMP/Definition/CMakeFiles/Definition.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lap/app/EffictiveModernCPP/build/CMakeFiles 0
+.PHONY : GMP/Definition/CMakeFiles/Definition.dir/rule
+
+# Convenience name for target.
+Definition: GMP/Definition/CMakeFiles/Definition.dir/rule
+.PHONY : Definition
+
+# clean rule for target.
+GMP/Definition/CMakeFiles/Definition.dir/clean:
+	$(MAKE) $(MAKESILENT) -f GMP/Definition/CMakeFiles/Definition.dir/build.make GMP/Definition/CMakeFiles/Definition.dir/clean
+.PHONY : GMP/Definition/CMakeFiles/Definition.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

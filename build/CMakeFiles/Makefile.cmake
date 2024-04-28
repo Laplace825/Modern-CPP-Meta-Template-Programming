@@ -8,10 +8,13 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/lap/app/EffictiveModernCPP/CMakeLists.txt"
+  "/home/lap/app/EffictiveModernCPP/GMP/CMakeLists.txt"
+  "/home/lap/app/EffictiveModernCPP/GMP/Definition/CMakeLists.txt"
+  "/home/lap/app/EffictiveModernCPP/MCPP/CMakeLists.txt"
+  "/home/lap/app/EffictiveModernCPP/MCPP/item19/CMakeLists.txt"
   "CMakeFiles/3.27.4/CMakeCCompiler.cmake"
   "CMakeFiles/3.27.4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.27.4/CMakeSystem.cmake"
-  "/home/lap/app/EffictiveModernCPP/item19/CMakeLists.txt"
   "/usr/share/cmake-3.27/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.27/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake"
@@ -41,10 +44,14 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "item19/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "MCPP/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "MCPP/item19/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "GMP/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "GMP/Definition/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "item19/CMakeFiles/item19.dir/DependInfo.cmake"
+  "MCPP/item19/CMakeFiles/item19.dir/DependInfo.cmake"
+  "GMP/Definition/CMakeFiles/Definition.dir/DependInfo.cmake"
   )

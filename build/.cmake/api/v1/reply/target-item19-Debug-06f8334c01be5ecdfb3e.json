@@ -14,7 +14,7 @@
 		],
 		"files" : 
 		[
-			"item19/CMakeLists.txt"
+			"MCPP/item19/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -53,7 +53,7 @@
 			]
 		}
 	],
-	"id" : "item19::@cc542242a952723d9b5b",
+	"id" : "item19::@f237048652ed08b7b370",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -73,8 +73,8 @@
 	"nameOnDisk" : "item19",
 	"paths" : 
 	{
-		"build" : "item19",
-		"source" : "item19"
+		"build" : "MCPP/item19",
+		"source" : "MCPP/item19"
 	},
 	"sourceGroups" : 
 	[
@@ -91,7 +91,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "item19/enable_if.cpp",
+			"path" : "MCPP/item19/enable_if.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

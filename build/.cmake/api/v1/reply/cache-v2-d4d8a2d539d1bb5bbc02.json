@@ -771,7 +771,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "2"
+			"value" : "5"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
