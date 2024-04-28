@@ -1,3 +1,13 @@
+/*
+ * @Author: laplace825
+ * @Date: 2024-04-28 22:01:50
+ * @LastEditors: laplace825
+ * @LastEditTime: 2024-04-28 23:31:01
+ * @FilePath: /EffictiveModernCPP/GMP/Definition/main.cpp
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by laplace825, All Rights Reserved. 
+ */
 #include <format>
 #include <iostream>
 #include <string>
@@ -10,6 +20,14 @@ Type add(Type a, Type b) {
     std::cout << format("add({},{}) ", a, b);
     return a + b;
 }
+
+template <typename T>
+struct GetPtr {
+    using type = T*;
+};
+
+template <typename T>
+using GetPtr_t = GetPtr<T>::type;
 
 signed main() {
     std::cout << add(1, 2) << '\n';
@@ -28,4 +46,7 @@ signed main() {
     // NOTE: 没有参数无法推导
     // add<>();
     // add<int>();
+
+    // NOTE: 实际上定义了一个 int*
+    GetPtr_t<int> ptr;
 }
