@@ -1,22 +1,19 @@
 /*
  * @Author: Laplace825
  * @Date: 2024-06-14 15:31:33
- * @LastEditTime: 2024-06-14 18:27:34
+ * @LastEditTime: 2024-06-14 20:56:51
  * @LastEditors: Laplace825
  * @FilePath: \EffectiveModernCPP\GMP\no-type-param-template\main.cc
  * @Description:
  * Copyright (c) 2024 by Laplace825, All Rights Reserved.
  */
-#include <vcruntime_typeinfo.h>
 #include <array>
 #include <initializer_list>
 #include <print>
 #include <string>
-#include <string_view>
 #include <type_traits>
 
 using std::println;
-using std::print;
 
 namespace lap {
 
