@@ -33,3 +33,5 @@
 .history/
 .cache/
 .vscode/
+cmake-build/
+build/

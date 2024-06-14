@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/item19.dir/enable_if.cpp.o -o /home/lap/app/EffictiveModernCPP/bin/item19 

@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/Definition.dir/main.cpp.o -o /home/lap/app/EffictiveModernCPP/bin/Definition 

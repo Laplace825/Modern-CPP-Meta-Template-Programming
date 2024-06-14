@@ -1,1 +1,5 @@
 add_subdirectory(./Definition)
+add_subdirectory(./func-template)
+add_subdirectory(./class-template)
+add_subdirectory(./no-type-param-template)
+add_subdirectory(./variadic)

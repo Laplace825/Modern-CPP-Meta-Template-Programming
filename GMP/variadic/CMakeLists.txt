@@ -1,0 +1,1 @@
+add_executable(variable main.cc)
