@@ -1,8 +1,5 @@
-#include <vcruntime_typeinfo.h>
-#include <cstddef>
 #include <deque>
 #include <initializer_list>
-// #include <ostream>
 #include <iostream>
 #include <print>
 #include <string>
@@ -94,6 +91,7 @@ private:
 
 public:
     Stack(T *elem) { m_data.push_back(elem); }
+    void print() { std::println("Stack<T*>"); }
 }; // 一个专门处理指针的特例,可以连底层实现都完全不同
 
 // 要求将char const * 推导为std::string
@@ -103,7 +101,7 @@ public:
 **/
 Stack(char const *) -> Stack<std::string>;
 Stack(char *const) -> Stack<std::string>;
-
+Stack(std::initializer_list<const char *>) -> Stack<std::string>;
 
 void DedutionGuides()
 {
@@ -121,6 +119,10 @@ void DedutionGuides()
     那么这里stk_other匹配了这个类的构造函数
     **/
     Stack stk_other{"Hello"};
+    int *p = new int[7];
+    Stack stk_ptr(p);
+    stk_ptr.print();
+    delete[] p;
 }
 
 // 聚合类
@@ -131,11 +133,12 @@ struct ValueWithComment
     std::string comment;
 };
 
-ValueWithComment(int, const char *) -> ValueWithComment<int>;
+template <typename T>
+ValueWithComment(T, const char *) -> ValueWithComment<T>;
 
 void testValueWithComment()
 {
-    ValueWithComment valWizComet{10, "hlo"};
+    ValueWithComment valWizComet{.value = 10, .comment = "hlo"};
 
     // 当没有显示指明类型推断指引时，无法使用=的初始化构造
     ValueWithComment valWizComet1 = {10, "hlo"};
