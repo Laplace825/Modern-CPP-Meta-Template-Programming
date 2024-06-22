@@ -9,6 +9,7 @@
  */
 
 #include <print>
+#include <stdexcept>
 #include <tuple>
 #include <vector>
 #include <format>
@@ -83,22 +84,40 @@ void betterPrint(T firstArg, Args... args)
 
 // since C++ 17 折叠表达式
 template <typename... Args>
-void foldPrint(Args... args)
+void foldPrintLeft(Args... args)
 {
-    println("[foldPrint]"); // 展开参数包
+    println("[foldPrintLeft]"); // 展开参数包
     (println("{}", args), ...);
 }
 
 template <typename... Args>
-auto foldSum(Args... args)
+void foldPrintRight(Args... args)
 {
-    // 展开参数包,并求和,但是不能是空参数包
-    if constexpr (sizeof...(args) == 0)
+    println("[foldPrintRight]"); // 展开参数包
+    (..., println("{}", args));
+}
+
+void testKuohao()
+{
+    // 测试括号表达式
+    int a{0}, b{0}, c{0};
+    println("{}", (a = 1, b = 2, a + b + c));
+}
+
+template <typename T, typename... Args>
+auto foldSum(T firstArg, Args... args)
+{
+    if constexpr ((std::is_same_v<T, Args> && ...))
     {
-        return 0;
+        auto res = (args + ... + firstArg);
+        println("[foldSum]:{}", res); // 展开参数包
+        return res;
     }
-    println("[foldSum]:{}", (args + ...)); // 展开参数包
-    return (args + ...);
+    else
+    {
+        throw std::runtime_error(
+            "please input the same type of arguments to sum");
+    }
 }
 
 struct Node
@@ -194,6 +213,18 @@ void printByIdx(T t)
     (println("{}", std::get<Idx>(t)), ...);
 }
 
+template <std::size_t...>
+struct IndexSequence
+{
+};
+
+template <typename T, std::size_t... Idx>
+void printValueWithIndices(T t, IndexSequence<Idx...>)
+{
+    println("[printValueWithIdx]");
+    (println("{}", std::get<Idx>(t)), ...);
+}
+
 class Customer2
 {
 private:
@@ -252,38 +283,91 @@ void testCustomer2()
 
     std::unordered_set<Customer2, CustomerOverloader, CustomerOverloader> co2;
 }
+template <typename... ElemTypes>
+class Tuple
+{
+};
+
+template <typename T>
+class Tuple<T>
+{
+public:
+    using base_type = Tuple<>;
+    using this_type = Tuple<T>;
+    using data_type = T;
+    constexpr Tuple(data_type&& value) : m_value(std::forward<data_type>(value))
+    {
+    }
+
+    data_type& get() { return m_value; }
+
+protected:
+    data_type m_value;
+};
+
+template <typename T, typename... ElemTypes>
+class Tuple<T, ElemTypes...> : private Tuple<ElemTypes...>
+{
+public:
+    using base_type = Tuple<ElemTypes...>;
+    using this_type = Tuple<T, ElemTypes...>;
+    using data_type = T;
+    constexpr Tuple(data_type&& value, ElemTypes&&... values)
+        : base_type(std::forward<ElemTypes>(values)...),
+          m_value(std::forward<data_type>(value))
+    {
+    }
+    using Tuple<ElemTypes...>::get;
+    // data_type& get() { return m_value; }
+
+protected:
+    data_type m_value;
+};
+
+template <typename... Args>
+auto makeTuple(Args&&... args)
+{
+    return Tuple<Args...>(std::forward<Args>(args)...);
+}
 
 } // namespace lap
 
 auto main() -> int
 {
-    lap::print(1, 2, 3, "hello", 3.14, 'c');
+    std::string str = "hello";
+    std::string str2 = "world";
+    std::string str3 = "CPP";
+    println("{}", lap::foldSum(str, str2, str3));
+    // lap::print(1, 2, 3, "hello", 3.14, 'c');
 
-    lap::getArgsSize(1, 2, 3, "hello", 3.14, 'c');
-    lap::betterPrint(1, 2, 3, "hello", 3.14, 'c');
-    lap::foldPrint(1, 2, 3, "hello", 3.14, 'c');
-    lap::foldSum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-    lap::foldSum(1, 2.1, 3.1);
-    lap::createCustomers();
-    lap::doublePrint(1, 2, 3, 4, 5);
+    // lap::getArgsSize(1, 2, 3, "hello", 3.14, 'c');
+    // lap::betterPrint(1, 2, 3, "hello", 3.14, 'c');
+    // lap::foldPrintLeft(1, 2, 3, "hello", 3.14, 'c');
+    // lap::foldPrintRight(1, 2, 3, "hello", 3.14, 'c');
+    // lap::foldSum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    // lap::foldSum(1, 2.1, 3.1);
+    // lap::createCustomers();
+    // lap::doublePrint(1, 2, 3, 4, 5);
 
-    // 展开为 std::is_smae_v<int 1,int 2> && std::is_same_v<int 1,int 3> && ...
-    // 实际上没有数字在这里,只是为了方便理解
-    println("is same ? {}", lap::isSameType(1, 2, 3, 4, 5));
-    println("is same ? {}", lap::isSameType(1, 2, 3, 4, '1'));
+    // // 展开为 std::is_smae_v<int 1,int 2> && std::is_same_v<int 1,int 3> &&
+    // ...
+    // // 实际上没有数字在这里,只是为了方便理解
+    // println("is same ? {}", lap::isSameType(1, 2, 3, 4, 5));
+    // println("is same ? {}", lap::isSameType(1, 2, 3, 4, '1'));
 
     std::vector<int> vec = {1, 2, 3, 10, 1, 5};
     lap::printValuesTemplate<2, 0, 1>(vec); // 访问下标为0,2,1的元素
 
-    std::vector<lap::Customer> cuss = {
-        {"lap", 25, 1020.0}, {"jack", 22, 1100.0}, {"Alan", 20, 1500.0}};
+    // std::vector<lap::Customer> cuss = {
+    //     {"lap", 25, 1020.0}, {"jack", 22, 1100.0}, {"Alan", 20, 1500.0}};
 
-    lap::printValues(cuss, 0, 2);
+    // lap::printValues(cuss, 0, 2);
 
     auto tup = std::make_tuple(1, "hello", lap::Customer{"lap", 25, 1020.0});
+    lap::printByIdx<1, 2, 0>(tup);
+    lap::printValueWithIndices(tup, lap::IndexSequence<0, 1, 2>());
+    // lap::testCustomer2();
 
-    lap::printByIdx<1, 2>(tup);
-    lap::testCustomer2();
-
+    // lap::testKuohao();
     return 0;
 }

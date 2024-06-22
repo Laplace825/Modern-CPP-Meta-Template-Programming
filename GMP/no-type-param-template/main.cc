@@ -17,12 +17,15 @@ using std::println;
 
 namespace lap {
 
-template <typename T, std::size_t MaxSize>
+template <typename T, auto MaxSize>
 class Array
 {
+public:
+    using size_type = decltype(MaxSize);
+
 private:
     std::array<T, MaxSize> m_data;
-    std::size_t m_length;
+    size_type m_length;
 
 public:
     constexpr Array() = default;
@@ -32,7 +35,7 @@ public:
         std::copy(initList.begin(), initList.end(), m_data.begin());
     }
 
-    constexpr std::size_t length() const { return m_length; }
+    constexpr size_type length() const { return m_length; }
 };
 
 // since C++ 17
@@ -103,6 +106,19 @@ void testStackType()
     }
 }
 
+void testArrayType()
+{
+    Array<int, 20u> intArray;
+    Array<std::string, 40> stringArray;
+    // 编译期检查
+    if constexpr (!std::is_same_v<decltype(intArray)::size_type,
+                                  decltype(stringArray)::size_type>)
+    { // size type 一个是 usigned int, 一个是 int
+        println("intStack size_type is unsigned int"
+                "stringStack size_type is int");
+    }
+}
+
 template <auto T>
 // parameter( since C++17)
 class Message
@@ -116,19 +132,38 @@ void testMessage()
     // 可以是静态的常量表达式 since C++17
     static const char theMsg[] = "hello";
     // 依然不能是浮点数或类类型
-    
+
     Message<theMsg>::print();
     Message<42>::print();
 }
 
+template <decltype(auto) N>
+class Nclass
+{
+public:
+    using N_type = decltype(N);
+};
+
 } // namespace lap
+
+template <typename T>
+using reference_type = T *const;
+
+int globalInt = 10;
+
+void testRefer()
+{
+    static int constexprInt = 10;
+    constexpr int const &i = constexprInt;
+}
 
 auto main() -> int
 {
     constexpr lap::Array<int, 5> array = {1, 2, 3, 4, 5};
     constexpr auto arrsize = array.length();
     int integer = 10;
-    lap::addValue<10>(integer);
+    char const *str = "hello";
+    lap::addValue<10>(str); // bad idea
     println("add 10 integer :{:*^10}", integer);
     lap::addValue<10, int>(integer);
     println("add 10 integer :{:*^10}", integer);
@@ -138,13 +173,22 @@ auto main() -> int
     println("add 1 integer :{:*^10}", integer);
 
     double floatNumber = 1.02;
-    lap::addValueDefault<int, 100>(integer);
+    // lap::addValueDefault<int, 10>(integer);
+    lap::addValueDefault<int>(integer);
+    println("add integer :{:*^10}", integer);
     // lap::addValueAuto<10.2>(floatNumber); //
     // 浮点数和类类型都不能作为非类型模版参数限制
 
     // lap::addValueDouble<10.2>(floatNumber);
-
     lap::testStackType();
     lap::testMessage();
+    lap::testArrayType();
+
+    static int constexprInt = 10;
+    constexpr int &i = globalInt;
+
+    lap::Nclass<i> n;
+
+    // testRefer(integer);
     return 0;
 }
