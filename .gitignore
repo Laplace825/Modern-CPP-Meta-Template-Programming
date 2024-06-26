@@ -31,8 +31,6 @@
 *.exe
 *.out
 *.app
-.history/*
-.cache/*
 .vscode/*
 cmake-build/*
 build/*
