@@ -11,14 +11,14 @@
 #include <print>
 #include <type_traits>
 
-template <typename T1, typename T2>
-std::common_type_t<T1, T2> getMax(T1 a, T2 b)
+template < typename T1, typename T2 >
+std::common_type_t< T1, T2 > getMax(T1 a, T2 b)
 {
     // 若能转化,类型会发生向上隐式转换
     return b < a ? a : b;
 }
 
-template <typename T1, typename T2>
+template < typename T1, typename T2 >
 auto getMax2(T1 a, T2 b) -> decltype(b < a ? a : b)
 // eq to  -> decltype(true ? a : b)
 {
@@ -30,21 +30,21 @@ auto getMax2(T1 a, T2 b) -> decltype(b < a ? a : b)
 }
 
 // 避免返回类型为引用
-template <typename T1, typename T2>
-auto getMax3(T1 a, T2 b) -> std::decay_t<decltype(true ? a : b)>
+template < typename T1, typename T2 >
+auto getMax3(T1 a, T2 b) -> std::decay_t< decltype(true ? a : b) >
 {
     return b < a ? a : b;
 }
 
-template <typename T1, typename T2,
-          typename RT = std::decay_t<decltype(true ? T1() : T2())>>
+template < typename T1, typename T2,
+           typename RT = std::decay_t< decltype(true ? T1() : T2()) > >
 // T1() 为 T1 类型的默认构造
 RT getMax4(T1 a, T2 b)
 {
     return b < a ? a : b;
 }
 
-template <typename T>
+template < typename T >
 T getMaxSameType(T a, T b)
 {
     // 模版禁止自动类型转化(隐式类型转换)
@@ -58,7 +58,7 @@ int getMaxSameType(int a, int b)
     return b < a ? a : b;
 }
 
-template <typename T>
+template < typename T >
 T const &getMaxRefer(T const &a, T const &b)
 {
     return b < a ? a : b;
@@ -69,7 +69,7 @@ char const *getMaxRefer(char const *a, char const *b)
     return std::strcmp(b, a) < 0 ? a : b;
 }
 
-template <typename T>
+template < typename T >
 T const &getMaxRefer(T const &a, T const &b, T const &c)
 {
     /**
@@ -80,7 +80,7 @@ T const &getMaxRefer(T const &a, T const &b, T const &c)
     return getMaxRefer(getMaxRefer(a, b), c);
 }
 
-template <typename T1, typename T2>
+template < typename T1, typename T2 >
 constexpr auto getMaxConstexpr(T1 a, T2 b)
 {
     return b < a ? a : b;
@@ -89,16 +89,16 @@ constexpr auto getMaxConstexpr(T1 a, T2 b)
 auto main() -> int
 {
     using std::println;
-    auto res = getMax(1, 2.2);
+    auto res  = getMax(1, 2.2);
     auto res2 = getMax2(1, 0.1);
     auto res3 = getMax3(1, 0.1);
     auto res4 = getMax4(1, 0.1);
-    auto x = int();
+    auto x    = int();
 
     getMaxSameType('a', 9);
     getMaxSameType<>(1, 10); // 调用模版函数,解析为模版调用
     // getMaxSameType<>('a',9); // 无法推导类型
-    getMaxSameType('a', static_cast<char>(9)); // 此时类型为 char
+    getMaxSameType('a', static_cast< char >(9)); // 此时类型为 char
 
     char const *s1 = "zrederic";
     char const *s2 = "anica";
@@ -107,7 +107,7 @@ auto main() -> int
 
     constexpr auto x3 = getMaxConstexpr(1000u, sizeof(char));
     println("max of 1000u and sizeof char : {}", x3);
-    std::array<int, x3> arr = {1, 2, 3, 4, 5};
+    std::array< int, x3 > arr = {1, 2, 3, 4, 5};
 
     return 0;
 }

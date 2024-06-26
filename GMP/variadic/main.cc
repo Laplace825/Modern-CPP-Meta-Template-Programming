@@ -8,13 +8,13 @@
  * Copyright (c) 2024 by Laplace825, All Rights Reserved.
  */
 
+#include <format>
 #include <print>
 #include <stdexcept>
 #include <tuple>
-#include <vector>
-#include <format>
-#include <vector>
 #include <unordered_set>
+#include <vector>
+
 
 using std::println;
 
@@ -29,13 +29,13 @@ struct Customer
 
 namespace std {
 template <>
-struct formatter<lap::Customer>
+struct formatter< lap::Customer >
 {
     // 解析格式规范（如果你需要的话）
     constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
 
     // 格式化 Customer 对象
-    template <typename FormatContext>
+    template < typename FormatContext >
     auto format(const lap::Customer& c,
                 FormatContext& ctx) const -> decltype(ctx.out())
     {
@@ -48,20 +48,20 @@ struct formatter<lap::Customer>
 
 namespace lap {
 
-template <typename T>
+template < typename T >
 void print(T arg)
 {
     println("{}", arg);
 }
 
-template <typename T, typename... Args>
+template < typename T, typename... Args >
 void print(T firstArg, Args... args)
 {
     println("{}", firstArg);
     print(args...); // 每次把第二个参数及以后传入,直到最后一个参数
 }
 
-template <typename... Args>
+template < typename... Args >
 void getArgsSize(Args... args)
 {
     // sizeof...()返回参数包中的参数个数
@@ -70,7 +70,7 @@ void getArgsSize(Args... args)
     println("args has {} elements", sizeof...(args));
 }
 
-template <typename T, typename... Args>
+template < typename T, typename... Args >
 void betterPrint(T firstArg, Args... args)
 {
     println("{}", firstArg);
@@ -83,14 +83,14 @@ void betterPrint(T firstArg, Args... args)
 }
 
 // since C++ 17 折叠表达式
-template <typename... Args>
+template < typename... Args >
 void foldPrintLeft(Args... args)
 {
     println("[foldPrintLeft]"); // 展开参数包
     (println("{}", args), ...);
 }
 
-template <typename... Args>
+template < typename... Args >
 void foldPrintRight(Args... args)
 {
     println("[foldPrintRight]"); // 展开参数包
@@ -104,10 +104,10 @@ void testKuohao()
     println("{}", (a = 1, b = 2, a + b + c));
 }
 
-template <typename T, typename... Args>
+template < typename T, typename... Args >
 auto foldSum(T firstArg, Args... args)
 {
-    if constexpr ((std::is_same_v<T, Args> && ...))
+    if constexpr ((std::is_same_v< T, Args > && ...))
     {
         auto res = (args + ... + firstArg);
         println("[foldSum]:{}", res); // 展开参数包
@@ -125,13 +125,15 @@ struct Node
     int value;
     Node* left;
     Node* right;
+
     Node(int i = 0) : value(i), left(nullptr), right(nullptr) {}
 };
 
-auto left = &Node::left;
+auto left  = &Node::left;
 auto right = &Node::right;
+
 // traverse tree, using fold expression:
-template <typename T, typename... TP>
+template < typename T, typename... TP >
 Node* traverse(T np, TP... paths)
 {
     /**
@@ -142,7 +144,7 @@ Node* traverse(T np, TP... paths)
 
 void createCustomers()
 {
-    std::vector<Customer> customers;
+    std::vector< Customer > customers;
     customers.emplace_back("Laplace", 25, 1000.0);
     customers.push_back({"Laplace", 25, 1000.0});
     for (const auto& c : customers)
@@ -151,7 +153,7 @@ void createCustomers()
     }
 }
 
-template <typename... Args>
+template < typename... Args >
 void doublePrint(const Args&... args)
 {
     println("[doublePrint]");
@@ -162,13 +164,13 @@ void doublePrint(const Args&... args)
     (println("{}", args + args), ...);
 }
 
-template <typename T, typename... Args>
+template < typename T, typename... Args >
 constexpr bool isSameType(T&&, Args&&...)
 {
-    return (std::is_same_v<Args, T> && ...);
+    return (std::is_same_v< Args, T > && ...);
 }
 
-template <typename Container, typename... Indexs>
+template < typename Container, typename... Indexs >
 void printValues(const Container& container, Indexs... indexs)
 {
     // lambda表达式,检查下标是否合法
@@ -187,7 +189,7 @@ void printValues(const Container& container, Indexs... indexs)
     (println("{}", container[indexs]), ...);
 }
 
-template <std::size_t... Indexs, typename Container>
+template < std::size_t... Indexs, typename Container >
 void printValuesTemplate(const Container& container)
 {
     // lambda表达式,检查下标是否合法
@@ -206,34 +208,36 @@ void printValuesTemplate(const Container& container)
     (println("{}", container[Indexs]), ...);
 }
 
-template <std::size_t... Idx, typename T>
+template < std::size_t... Idx, typename T >
 void printByIdx(T t)
 {
     println("[printByIdx]");
-    (println("{}", std::get<Idx>(t)), ...);
+    (println("{}", std::get< Idx >(t)), ...);
 }
 
-template <std::size_t...>
+template < std::size_t... >
 struct IndexSequence
 {
 };
 
-template <typename T, std::size_t... Idx>
-void printValueWithIndices(T t, IndexSequence<Idx...>)
+template < typename T, std::size_t... Idx >
+void printValueWithIndices(T t, IndexSequence< Idx... >)
 {
     println("[printValueWithIdx]");
-    (println("{}", std::get<Idx>(t)), ...);
+    (println("{}", std::get< Idx >(t)), ...);
 }
 
 class Customer2
 {
-private:
+  private:
     std::string name;
 
-public:
+  public:
     Customer2(std::string const& n) : name(n) {}
+
     std::string getName() const { return name; }
 };
+
 struct CustomerEq
 {
     bool operator()(Customer2 const& c1, Customer2 const& c2) const
@@ -241,15 +245,17 @@ struct CustomerEq
         return c1.getName() == c2.getName();
     }
 };
+
 struct CustomerHash
 {
     std::size_t operator()(Customer2 const& c) const
     {
-        return std::hash<std::string>()(c.getName());
+        return std::hash< std::string >()(c.getName());
     }
 };
+
 // define class that combines operator() for variadic base classes:
-template <typename... Bases>
+template < typename... Bases >
 struct Overloader : Bases...
 {
     /**
@@ -267,7 +273,7 @@ void testCustomer2()
     Customer2 c2("Jack");
     Customer2 c3("Laplace");
 
-    using CustomerOverloader = Overloader<CustomerEq, CustomerHash>;
+    using CustomerOverloader = Overloader< CustomerEq, CustomerHash >;
     CustomerEq eq;
     CustomerHash hash;
     CustomerOverloader overloader;
@@ -279,62 +285,67 @@ void testCustomer2()
     println("overloader(c1) = {}", overloader(c1));        // hash value
 
     // 指定哈希函数,和比较函数
-    std::unordered_set<Customer2, CustomerHash, CustomerEq> co1;
+    std::unordered_set< Customer2, CustomerHash, CustomerEq > co1;
 
-    std::unordered_set<Customer2, CustomerOverloader, CustomerOverloader> co2;
+    std::unordered_set< Customer2, CustomerOverloader, CustomerOverloader > co2;
 }
-template <typename... ElemTypes>
+
+template < typename... ElemTypes >
 class Tuple
 {
 };
 
-template <typename T>
-class Tuple<T>
+template < typename T >
+class Tuple< T >
 {
-public:
+  public:
     using base_type = Tuple<>;
-    using this_type = Tuple<T>;
+    using this_type = Tuple< T >;
     using data_type = T;
-    constexpr Tuple(data_type&& value) : m_value(std::forward<data_type>(value))
+
+    constexpr Tuple(data_type&& value)
+        : m_value(std::forward< data_type >(value))
     {
     }
 
     data_type& get() { return m_value; }
 
-protected:
+  protected:
     data_type m_value;
 };
 
-template <typename T, typename... ElemTypes>
-class Tuple<T, ElemTypes...> : private Tuple<ElemTypes...>
+template < typename T, typename... ElemTypes >
+class Tuple< T, ElemTypes... > : private Tuple< ElemTypes... >
 {
-public:
-    using base_type = Tuple<ElemTypes...>;
-    using this_type = Tuple<T, ElemTypes...>;
+  public:
+    using base_type = Tuple< ElemTypes... >;
+    using this_type = Tuple< T, ElemTypes... >;
     using data_type = T;
+
     constexpr Tuple(data_type&& value, ElemTypes&&... values)
-        : base_type(std::forward<ElemTypes>(values)...),
-          m_value(std::forward<data_type>(value))
+        : base_type(std::forward< ElemTypes >(values)...),
+          m_value(std::forward< data_type >(value))
     {
     }
-    using Tuple<ElemTypes...>::get;
+
+    using Tuple< ElemTypes... >::get;
     // data_type& get() { return m_value; }
 
-protected:
+  protected:
     data_type m_value;
 };
 
-template <typename... Args>
+template < typename... Args >
 auto makeTuple(Args&&... args)
 {
-    return Tuple<Args...>(std::forward<Args>(args)...);
+    return Tuple< Args... >(std::forward< Args >(args)...);
 }
 
 } // namespace lap
 
 auto main() -> int
 {
-    std::string str = "hello";
+    std::string str  = "hello";
     std::string str2 = "world";
     std::string str3 = "CPP";
     println("{}", lap::foldSum(str, str2, str3));
@@ -355,8 +366,8 @@ auto main() -> int
     // println("is same ? {}", lap::isSameType(1, 2, 3, 4, 5));
     // println("is same ? {}", lap::isSameType(1, 2, 3, 4, '1'));
 
-    std::vector<int> vec = {1, 2, 3, 10, 1, 5};
-    lap::printValuesTemplate<2, 0, 1>(vec); // 访问下标为0,2,1的元素
+    std::vector< int > vec = {1, 2, 3, 10, 1, 5};
+    lap::printValuesTemplate< 2, 0, 1 >(vec); // 访问下标为0,2,1的元素
 
     // std::vector<lap::Customer> cuss = {
     //     {"lap", 25, 1020.0}, {"jack", 22, 1100.0}, {"Alan", 20, 1500.0}};
@@ -364,8 +375,8 @@ auto main() -> int
     // lap::printValues(cuss, 0, 2);
 
     auto tup = std::make_tuple(1, "hello", lap::Customer{"lap", 25, 1020.0});
-    lap::printByIdx<1, 2, 0>(tup);
-    lap::printValueWithIndices(tup, lap::IndexSequence<0, 1, 2>());
+    lap::printByIdx< 1, 2, 0 >(tup);
+    lap::printValueWithIndices(tup, lap::IndexSequence< 0, 1, 2 >());
     // lap::testCustomer2();
 
     // lap::testKuohao();

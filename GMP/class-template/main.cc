@@ -1,3 +1,12 @@
+/*** 
+ * @author: "laplace"
+ * @date: 2024-06-13T20:11:04
+ * @lastmod: 2024-06-26T15:18:44
+ * @description:  
+ * @filePath: /EffectiveModernCPP/GMP/class-template/main.cc
+ * @lastEditor: Laplace825
+ * @Copyright: Copyright (c) 2024 by Laplace825, All Rights Reserved.
+**/
 #include <deque>
 #include <initializer_list>
 #include <iostream>
@@ -7,29 +16,31 @@
 
 namespace lap {
 
-template <typename T>
+template < typename T >
 class Stack;
 
-template <typename T>
-std::ostream &operator<<(std::ostream &, Stack<T> const &);
+template < typename T >
+std::ostream &operator<<(std::ostream &, Stack< T > const &);
 
-template <typename T>
+template < typename T >
 class Stack
 {
     // @note: 重载时,这里必须声明为一个特化的函数模板
     // 因为在重载的定义当中，我们必须使用template进行定义
-    friend std::ostream &operator<< <>(std::ostream &, Stack<T> const &);
+    friend std::ostream &operator<< <>(std::ostream &, Stack< T > const &);
 
-private:
-    std::vector<T> m_data;
+  private:
+    std::vector< T > m_data;
 
-public:
+  public:
     Stack() = default;
     Stack(Stack const
               &); // 参数不指定模板特化类型,默认与当前被构造的Stack类型一致
-    Stack(Stack<T> &, size_t size);
+    Stack(Stack< T > &, size_t size);
+
     Stack(T elem) : m_data({std::move(elem)}) {}
-    Stack(const std::initializer_list<T> &initList) : m_data(initList) {}
+
+    Stack(const std::initializer_list< T > &initList) : m_data(initList) {}
 
     void pop()
     {
@@ -71,8 +82,8 @@ public:
     }
 };
 
-template <typename T>
-std::ostream &operator<<(std::ostream &out, Stack<T> const &stk)
+template < typename T >
+std::ostream &operator<<(std::ostream &out, Stack< T > const &stk)
 {
     for (auto &elem : stk.m_data)
     {
@@ -83,14 +94,15 @@ std::ostream &operator<<(std::ostream &out, Stack<T> const &stk)
 }
 
 // 模板特例化
-template <typename T>
-class Stack<T *>
+template < typename T >
+class Stack< T * >
 {
-private:
-    std::deque<T *> m_data;
+  private:
+    std::deque< T * > m_data;
 
-public:
+  public:
     Stack(T *elem) { m_data.push_back(elem); }
+
     void print() { std::println("Stack<T*>"); }
 }; // 一个专门处理指针的特例,可以连底层实现都完全不同
 
@@ -99,9 +111,9 @@ public:
     @brief: 其实也就是显式要求针对某种构造函数，需要构造哪种类型的模版实例
     例如针对使用 char const * 的构造，需要构造一个std::string的模版实例
 **/
-Stack(char const *) -> Stack<std::string>;
-Stack(char *const) -> Stack<std::string>;
-Stack(std::initializer_list<const char *>) -> Stack<std::string>;
+Stack(char const *) -> Stack< std::string >;
+Stack(char *const) -> Stack< std::string >;
+Stack(std::initializer_list< const char * >) -> Stack< std::string >;
 
 void DedutionGuides()
 {
@@ -126,15 +138,15 @@ void DedutionGuides()
 }
 
 // 聚合类
-template <typename T>
+template < typename T >
 struct ValueWithComment
 {
     T value;
     std::string comment;
 };
 
-template <typename T>
-ValueWithComment(T, const char *) -> ValueWithComment<T>;
+template < typename T >
+ValueWithComment(T, const char *) -> ValueWithComment< T >;
 
 void testValueWithComment()
 {
@@ -145,18 +157,18 @@ void testValueWithComment()
 }
 
 // 部分模板特例化
-template <typename T1, typename T2>
+template < typename T1, typename T2 >
 class TwoTemplateClass
 {
 };
 
-template <typename T>
-class TwoTemplateClass<T, T>
+template < typename T >
+class TwoTemplateClass< T, T >
 {
 };
 
-template <typename T>
-class TwoTemplateClass<T, int>
+template < typename T >
+class TwoTemplateClass< T, int >
 {
 };
 
@@ -165,7 +177,7 @@ class TwoTemplateClass<T, int>
 auto main() -> int
 {
     {
-        lap::Stack<int> stk;
+        lap::Stack< int > stk;
 
         class ILOVEU; // 非模板类可以在块作用域内直接声明或定义
 
@@ -173,7 +185,7 @@ auto main() -> int
         // class lap::Stack;
     }
 
-    lap::Stack<int> stk = {1, 2, 10};
+    lap::Stack< int > stk = {1, 2, 10};
     std::cout << stk;
     lap::DedutionGuides();
 }
