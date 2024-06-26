@@ -2,14 +2,15 @@
 BasedOnStyle: Google
 ---
 Language: Cpp
-AccessModifierOffset: -4
+AccessModifierOffset: -2 
 # AlignAfterOpenBracket: Align
+AlignArrayOfStructures: Left
 # AlignConsecutiveMacros: false
-# AlignConsecutiveAssignments: false
+AlignConsecutiveAssignments: true 
 # AlignConsecutiveDeclarations: false
 # AlignEscapedNewlines: Left
 # AlignOperands: true
-# AlignTrailingComments: true
+AlignTrailingComments: Always 
 # AllowAllArgumentsOnNextLine: true
 AllowAllConstructorInitializersOnNextLine: false
 # AllowAllParametersOfDeclarationOnNextLine: true
@@ -44,9 +45,10 @@ BraceWrapping:
   # SplitEmptyNamespace: true
 # BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
+BreakBeforeConceptDeclarations: Allowed
 # BreakBeforeInheritanceComma: false
 # BreakInheritanceList: BeforeColon
-# BreakBeforeTernaryOperators: true
+BreakBeforeTernaryOperators: true
 # BreakConstructorInitializersBeforeComma: false
 # BreakConstructorInitializers: BeforeColon
 # BreakAfterJavaFieldAnnotations: false
@@ -55,19 +57,20 @@ BreakBeforeBraces: Custom
 CommentPragmas: "^ NOLINT:"
 # CompactNamespaces: false
 # ConstructorInitializerAllOnOneLineOrOnePerLine: true
-# ConstructorInitializerIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
 # ContinuationIndentWidth: 4
 # Cpp11BracedListStyle: true
 # DeriveLineEnding: true
 # DerivePointerAlignment: true
 # DisableFormat: false
 # ExperimentalAutoDetectBinPacking: false
+EmptyLineBeforeAccessModifier: "LogicalBlock"
 # FixNamespaceComments: true
 # ForEachMacros:
 #   - foreach
 #   - Q_FOREACH
 #   - BOOST_FOREACH
-# IncludeBlocks: Regroup
+IncludeBlocks: Regroup
 # IncludeCategories:
 #   - Regex: '^<ext/.*\.h>'
 #     Priority: 2
@@ -83,7 +86,8 @@ CommentPragmas: "^ NOLINT:"
 #     SortPriority: 0
 # IncludeIsMainRegex: "([-_](test|unittest))?$"
 # IncludeIsMainSourceRegex: ""
-# IndentCaseLabels: true
+IndentAccessModifiers: false 
+IndentCaseLabels: true
 # IndentGotoLabels: true
 # IndentPPDirectives: None
 IndentWidth: 4
@@ -99,6 +103,7 @@ IndentWidth: 4
 # ObjCBlockIndentWidth: 2
 # ObjCSpaceAfterProperty: false
 # ObjCSpaceBeforeProtocolList: true
+PackConstructorInitializers: "BinPack"
 # PenaltyBreakAssignment: 2
 # PenaltyBreakBeforeFirstCallParameter: 1
 # PenaltyBreakComment: 300
@@ -107,7 +112,7 @@ IndentWidth: 4
 # PenaltyBreakTemplateDeclaration: 10
 # PenaltyExcessCharacter: 1000000
 # PenaltyReturnTypeOnItsOwnLine: 200
-PointerAlignment: Right
+PointerAlignment: Left 
 # RawStringFormats:
 #   - Language: Cpp
 #     Delimiters:
@@ -136,22 +141,25 @@ PointerAlignment: Right
 #       - ParseTextProtoOrDie
 #     CanonicalDelimiter: ""
 #     BasedOnStyle: google
-# ReflowComments: true
-SortIncludes: false
+ReflowComments: true
+ReferenceAlignment: Left
+SeparateDefinitionBlocks: Always
+SortIncludes: true
 SortUsingDeclarations: false
 # SpaceAfterCStyleCast: false
 # SpaceAfterLogicalNot: false
-# SpaceAfterTemplateKeyword: true
+SpaceAfterTemplateKeyword: true
 # SpaceBeforeAssignmentOperators: true
 # SpaceBeforeCpp11BracedList: false
 # SpaceBeforeCtorInitializerColon: true
 # SpaceBeforeInheritanceColon: true
-# SpaceBeforeParens: ControlStatements
-# SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
 # SpaceInEmptyBlock: false
 # SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
-# SpacesInAngles: false
+SpacesInAngles: Always
+# SpaceInContainerLiterals: true
 # SpacesInConditionalStatement: false
 SpacesInContainerLiterals: false
 # SpacesInCStyleCastParentheses: false
@@ -163,5 +171,5 @@ Standard: Latest
 #   - Q_UNUSED
 #   - QT_REQUIRE_VERSION
 TabWidth: 4
-# UseCRLF: false
+UseCRLF: false
 # UseTab: Never
