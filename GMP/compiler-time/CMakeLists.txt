@@ -1,0 +1,1 @@
+add_executable(compiler-time main.cc)

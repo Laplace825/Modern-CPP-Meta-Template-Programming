@@ -1,0 +1,1 @@
+add_executable(callables main.cc)
