@@ -8,6 +8,7 @@
  * Copyright (c) 2024 by Laplace825, All Rights Reserved.
  */
 #include <array>
+#include <cstring>
 #include <print>
 #include <type_traits>
 

@@ -9,6 +9,6 @@ ls ./GMP ./MCPP --hide=*.txt
 echo "\033[1;34m"
 read floder target
 echo "\033[0m"
-cd build && cmake .. && cmake --build ./$floder/$target && cd ..
+cd build && cmake .. && cmake --build . && cd ..
 
 ./bin/$target

@@ -1,1 +1,6 @@
-add_subdirectory(./item19)
+file(GLOB_RECURSE MCPP_SRCS *.cc)
+foreach(MCPP_SRC ${MCPP_SRCS})
+    get_filename_component(MCPP_SRC_DIR ${MCPP_SRC} DIRECTORY)
+    string(REGEX REPLACE ".*/(.*)" "\\1" CURRENT_FOLDER_ABSOLUTE ${MCPP_SRC_DIR})
+    add_executable(${CURRENT_FOLDER_ABSOLUTE} ${MCPP_SRC})
+endforeach()

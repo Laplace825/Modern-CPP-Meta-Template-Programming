@@ -32,6 +32,7 @@
 *.out
 *.app
 .vscode/*
+.cache/*
 cmake-build/*
 build/*
 bin/*

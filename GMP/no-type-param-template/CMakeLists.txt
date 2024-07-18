@@ -1,1 +1,0 @@
-add_executable(no-type-param-template main.cc)
