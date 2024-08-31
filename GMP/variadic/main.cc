@@ -15,55 +15,47 @@
 #include <unordered_set>
 #include <vector>
 
-
 using std::println;
 
+#define FMT_TRAIT(type, fmt_arg, fmt_str, ...)                 \
+    template <>                                                \
+    struct std::formatter< type > {                            \
+        constexpr auto parse(format_parse_context& ctx) {      \
+            return ctx.begin();                                \
+        }                                                      \
+        auto format(const type& fmt_arg,                       \
+          format_context& ctx) const -> decltype(ctx.out()) {  \
+            return format_to(ctx.out(), fmt_str, __VA_ARGS__); \
+        }                                                      \
+    };
+
 namespace lap {
-struct Customer
-{
+struct Customer {
     std::string name;
     int age;
     double money;
 };
+
 } // namespace lap
 
-namespace std {
-template <>
-struct formatter< lap::Customer >
-{
-    // 解析格式规范（如果你需要的话）
-    constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
-
-    // 格式化 Customer 对象
-    template < typename FormatContext >
-    auto format(const lap::Customer& c,
-                FormatContext& ctx) const -> decltype(ctx.out())
-    {
-        // 假设 Customer 类有 name, age, balance 属性
-        return format_to(ctx.out(), "Name: {}, Age: {}, Balance: {}", c.name,
-                         c.age, c.money);
-    }
-};
-} // namespace std
+FMT_TRAIT(
+  lap::Customer, c, "Name: {}, Age: {}, Balance: {}", c.name, c.age, c.money);
 
 namespace lap {
 
 template < typename T >
-void print(T arg)
-{
+void print(T arg) {
     println("{}", arg);
 }
 
 template < typename T, typename... Args >
-void print(T firstArg, Args... args)
-{
+void print(T firstArg, Args... args) {
     println("{}", firstArg);
     print(args...); // 每次把第二个参数及以后传入,直到最后一个参数
 }
 
 template < typename... Args >
-void getArgsSize(Args... args)
-{
+void getArgsSize(Args... args) {
     // sizeof...()返回参数包中的参数个数
 
     println("Args has {} elements", sizeof...(Args));
@@ -71,8 +63,7 @@ void getArgsSize(Args... args)
 }
 
 template < typename T, typename... Args >
-void betterPrint(T firstArg, Args... args)
-{
+void betterPrint(T firstArg, Args... args) {
     println("{}", firstArg);
     if constexpr (sizeof...(Args) > 0) // since C++ 17
     {
@@ -84,44 +75,37 @@ void betterPrint(T firstArg, Args... args)
 
 // since C++ 17 折叠表达式
 template < typename... Args >
-void foldPrintLeft(Args... args)
-{
+void foldPrintLeft(Args... args) {
     println("[foldPrintLeft]"); // 展开参数包
     (println("{}", args), ...);
 }
 
 template < typename... Args >
-void foldPrintRight(Args... args)
-{
+void foldPrintRight(Args... args) {
     println("[foldPrintRight]"); // 展开参数包
     (..., println("{}", args));
 }
 
-void testKuohao()
-{
+void testKuohao() {
     // 测试括号表达式
     int a{0}, b{0}, c{0};
     println("{}", (a = 1, b = 2, a + b + c));
 }
 
 template < typename T, typename... Args >
-auto foldSum(T firstArg, Args... args)
-{
-    if constexpr ((std::is_same_v< T, Args > && ...))
-    {
+auto foldSum(T firstArg, Args... args) {
+    if constexpr ((std::is_same_v< T, Args > && ...)) {
         auto res = (args + ... + firstArg);
         println("[foldSum]:{}", res); // 展开参数包
         return res;
     }
-    else
-    {
+    else {
         throw std::runtime_error(
-            "please input the same type of arguments to sum");
+          "please input the same type of arguments to sum");
     }
 }
 
-struct Node
-{
+struct Node {
     int value;
     Node* left;
     Node* right;
@@ -134,28 +118,24 @@ auto right = &Node::right;
 
 // traverse tree, using fold expression:
 template < typename T, typename... TP >
-Node* traverse(T np, TP... paths)
-{
+Node* traverse(T np, TP... paths) {
     /**
     @brief: 按照paths 给定的路径进行遍历
      */
     return (np->*...->*paths); // np ->* paths1 ->* paths2 …
 }
 
-void createCustomers()
-{
+void createCustomers() {
     std::vector< Customer > customers;
     customers.emplace_back("Laplace", 25, 1000.0);
     customers.push_back({"Laplace", 25, 1000.0});
-    for (const auto& c : customers)
-    {
+    for (const auto& c : customers) {
         println("{}", c);
     }
 }
 
 template < typename... Args >
-void doublePrint(const Args&... args)
-{
+void doublePrint(const Args&... args) {
     println("[doublePrint]");
     // 结果一致
 
@@ -165,22 +145,19 @@ void doublePrint(const Args&... args)
 }
 
 template < typename T, typename... Args >
-constexpr bool isSameType(T&&, Args&&...)
-{
+constexpr bool isSameType(T&&, Args&&...) {
     return (std::is_same_v< Args, T > && ...);
 }
 
 template < typename Container, typename... Indexs >
-void printValues(const Container& container, Indexs... indexs)
-{
+void printValues(const Container& container, Indexs... indexs) {
     // lambda表达式,检查下标是否合法
     // 相当于 python all()
     auto isIndexValid = [](auto size, auto... index) {
         return ((index < size) && ...);
     };
 
-    if (!isIndexValid(container.size(), indexs...))
-    {
+    if (!isIndexValid(container.size(), indexs...)) {
         throw std::out_of_range("index out of range");
     }
     // 展开参数包,并打印对应的值
@@ -190,16 +167,14 @@ void printValues(const Container& container, Indexs... indexs)
 }
 
 template < std::size_t... Indexs, typename Container >
-void printValuesTemplate(const Container& container)
-{
+void printValuesTemplate(const Container& container) {
     // lambda表达式,检查下标是否合法
     // 相当于 python all()
     auto isIndexValid = [](auto size, auto... index) {
         return ((index < size) && ...);
     };
 
-    if (!isIndexValid(container.size(), Indexs...))
-    {
+    if (!isIndexValid(container.size(), Indexs...)) {
         throw std::out_of_range("index out of range");
     }
     // 展开参数包,并打印对应的值
@@ -209,26 +184,21 @@ void printValuesTemplate(const Container& container)
 }
 
 template < std::size_t... Idx, typename T >
-void printByIdx(T t)
-{
+void printByIdx(T t) {
     println("[printByIdx]");
     (println("{}", std::get< Idx >(t)), ...);
 }
 
 template < std::size_t... >
-struct IndexSequence
-{
-};
+struct IndexSequence {};
 
 template < typename T, std::size_t... Idx >
-void printValueWithIndices(T t, IndexSequence< Idx... >)
-{
+void printValueWithIndices(T t, IndexSequence< Idx... >) {
     println("[printValueWithIdx]");
     (println("{}", std::get< Idx >(t)), ...);
 }
 
-class Customer2
-{
+class Customer2 {
   private:
     std::string name;
 
@@ -238,26 +208,21 @@ class Customer2
     std::string getName() const { return name; }
 };
 
-struct CustomerEq
-{
-    bool operator()(Customer2 const& c1, Customer2 const& c2) const
-    {
+struct CustomerEq {
+    bool operator()(Customer2 const& c1, Customer2 const& c2) const {
         return c1.getName() == c2.getName();
     }
 };
 
-struct CustomerHash
-{
-    std::size_t operator()(Customer2 const& c) const
-    {
+struct CustomerHash {
+    std::size_t operator()(Customer2 const& c) const {
         return std::hash< std::string >()(c.getName());
     }
 };
 
 // define class that combines operator() for variadic base classes:
 template < typename... Bases >
-struct Overloader : Bases...
-{
+struct Overloader : Bases... {
     /**
     @note: 相当于对所有的基类的operator()进行重载
     在这个customer2的例子中，重载了两个参数和一个参数的operator()
@@ -267,8 +232,7 @@ struct Overloader : Bases...
     using Bases::operator()...; // OK since C++17
 };
 
-void testCustomer2()
-{
+void testCustomer2() {
     Customer2 c1("Jack");
     Customer2 c2("Jack");
     Customer2 c3("Laplace");
@@ -291,22 +255,17 @@ void testCustomer2()
 }
 
 template < typename... ElemTypes >
-class Tuple
-{
-};
+class Tuple {};
 
 template < typename T >
-class Tuple< T >
-{
+class Tuple< T > {
   public:
     using base_type = Tuple<>;
     using this_type = Tuple< T >;
     using data_type = T;
 
     constexpr Tuple(data_type&& value)
-        : m_value(std::forward< data_type >(value))
-    {
-    }
+        : m_value(std::forward< data_type >(value)) {}
 
     data_type& get() { return m_value; }
 
@@ -315,8 +274,7 @@ class Tuple< T >
 };
 
 template < typename T, typename... ElemTypes >
-class Tuple< T, ElemTypes... > : private Tuple< ElemTypes... >
-{
+class Tuple< T, ElemTypes... > : private Tuple< ElemTypes... > {
   public:
     using base_type = Tuple< ElemTypes... >;
     using this_type = Tuple< T, ElemTypes... >;
@@ -324,9 +282,7 @@ class Tuple< T, ElemTypes... > : private Tuple< ElemTypes... >
 
     constexpr Tuple(data_type&& value, ElemTypes&&... values)
         : base_type(std::forward< ElemTypes >(values)...),
-          m_value(std::forward< data_type >(value))
-    {
-    }
+          m_value(std::forward< data_type >(value)) {}
 
     using Tuple< ElemTypes... >::get;
     // data_type& get() { return m_value; }
@@ -336,15 +292,13 @@ class Tuple< T, ElemTypes... > : private Tuple< ElemTypes... >
 };
 
 template < typename... Args >
-auto makeTuple(Args&&... args)
-{
+auto makeTuple(Args&&... args) {
     return Tuple< Args... >(std::forward< Args >(args)...);
 }
 
 } // namespace lap
 
-auto main() -> int
-{
+auto main() -> int {
     std::string str  = "hello";
     std::string str2 = "world";
     std::string str3 = "CPP";
