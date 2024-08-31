@@ -36,3 +36,5 @@
 cmake-build/*
 build/*
 bin/*
+build.ninja/*
+compile_commands.json
